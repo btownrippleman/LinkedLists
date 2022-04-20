@@ -10,6 +10,13 @@ public class Main {
         m.insertAt(7, 2);
         System.out.println(m); 
         System.out.println("the length of this node is"+m.getLength()); 
-
+        System.out.println("deleting at position 0");
+        m.delete(0);
+        System.out.println(m); 
+        System.out.println("the length of this node is"+m.getLength()); 
+        System.out.println("deleting at position 2");
+        m.delete(2);
+        System.out.println(m); 
+        System.out.println("the length of this node is"+m.getLength()); 
     }
 }

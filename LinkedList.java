@@ -4,7 +4,28 @@ public class LinkedList {
     private int val;
     LinkedList(int v){
         val = v;
+    
     }
+    public void delete(int index){
+        if(index == 0 && next !=null){
+            val = next.val;
+            next = next.next;
+        }
+        else   deleteAtPosition(index -1);
+    }
+
+    public void deleteAtPosition(int index){
+        if (next!= null){
+            if (index != 0){
+                next.deleteAtPosition(index-1);
+                }
+            else{
+                next = next.next;
+            }
+        }
+    }
+
+
     public int getLength(){
         if (this.next != null){
             return 1+next.getLength();

@@ -37,6 +37,7 @@ public class LinkedList
          if(current==null)
             return false;
          
+         
          prev.setNext(current.getNext());
          return true;    
    }//deleteAt
@@ -78,22 +79,62 @@ public class LinkedList
         return counter;
          
    }//getLength()
-   
-   
 
-   //toString method
-      @Override
-     public String toString()
-     {
-       String listString = "";
-       IntNode current=head;
-       for (int i=0; i<this.getLength(); i++ )
-       {
-         listString += current.getData() + " ";
-         current = current.getNext();
-       }
-       return listString;
-     }
+   public int getNumberOfOccurences(int number){
+      int occurences = recursionToGetOccurences(head,number);
+      if (occurences == 0) return -1;
+      else return occurences;
+   }
+   public int recursionToGetOccurences(IntNode node, int number){
+      if (node != null){
+         if (node.getData() == number) return 1+ recursionToGetOccurences(node.getNext(), number);
+         return recursionToGetOccurences(node.getNext(), number);
+      }
+      return 0;
+   }
+
+   
+   void delete(int key)
+	{
+		// Store head node
+		IntNode temp = head, prev = null;
+
+		// If head node itself holds the key
+		// or multiple occurrences of key
+		while (temp != null && temp.getData() == key)
+		{
+			head = temp.getNext(); // Changed head
+			temp = head; // Change Temp
+		}
+
+		// Delete occurrences other than head
+		while (temp != null)
+		{
+			// Search for the key to be deleted,
+			// keep track of the previous node
+			// as we need to change 'prev->next'
+			while (temp != null && temp.getData() != key)
+			{
+				prev = temp;
+				temp = temp.getNext();
+			}
+
+			// If key was not present in linked list
+			if (temp == null)
+				return;
+
+			// Unlink the node from linked list
+			prev.setNext(temp.getNext());
+
+			// Update Temp for next iteration of outer loop
+			temp = prev.getNext();
+		}
+	}
+
+  
+
+
+
      
    //
    public void insertAtRecursiveWrapper(int n, int index){
@@ -135,8 +176,7 @@ public class LinkedList
    public boolean insertAt(int n, int index)
    {//insertAt
       insertAtRecursiveWrapper(n, index);
-      if (true)
-      return true;
+
       int linkedListSize=this.getLength();
       IntNode theNode=new IntNode(n);
       
@@ -249,7 +289,19 @@ public class LinkedList
 //////////////////////////////////////////////////////////////////////      
    }
    
-   
+      //toString method
+      @Override
+     public String toString()
+     {
+       String listString = "";
+       IntNode current=head;
+       for (int i=0; i<this.getLength(); i++ )
+       {
+         listString += current.getData() + " ";
+         current = current.getNext();
+       }
+       return listString;
+     }
    
    
 }//LinkedList

@@ -24,9 +24,15 @@
       {
          next = newNext;
       }
-  
-      
-  
+
+
+ public String toString(){
+     if (this.next != null){
+         return data +" "+next.toString();
+     }
+     else return Integer.toString(data)+" ";
+
+ }
   
   }
  
